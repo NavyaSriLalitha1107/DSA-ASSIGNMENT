@@ -5,7 +5,6 @@ end conditions correctly.*/
 #include <stdlib.h>
 #include <string.h>
 #define MAX 100
-// Structure for a web page node
 struct Node {
     char page[MAX];
     struct Node *prev;
@@ -14,7 +13,6 @@ struct Node {
 struct Node *head = NULL;
 struct Node *tail = NULL;
 struct Node *current = NULL;
-// Create a new node
 struct Node* createNode(char page[]) {
     struct Node *newNode;
     newNode = (struct Node*)malloc(sizeof(struct Node));
@@ -27,7 +25,6 @@ struct Node* createNode(char page[]) {
     newNode->next = NULL;
     return newNode;
 }
-// Insert a new page at the end
 void insertPage() {
     char page[MAX];
     struct Node *newNode;
@@ -46,7 +43,6 @@ void insertPage() {
     }
     printf("Page inserted successfully.\n");
 }
-// Move forward
 void moveForward() {
     if (current == NULL) {
         printf("No pages in history.\n");
@@ -59,7 +55,6 @@ void moveForward() {
         printf("Moved forward to: %s\n", current->page);
     }
 }
-// Move backward
 void moveBackward() {
     if (current == NULL) {
         printf("No pages in history.\n");
@@ -72,7 +67,6 @@ void moveBackward() {
         printf("Moved backward to: %s\n", current->page);
     }
 }
-// Display first to last
 void displayForward() {
     struct Node *temp = head;
     if (head == NULL) {
@@ -88,7 +82,6 @@ void displayForward() {
     }
     printf("\n");
 }
-// Display last to first
 void displayBackward() {
     struct Node *temp = tail;
     if (tail == NULL) {
@@ -104,34 +97,28 @@ void displayBackward() {
     }
     printf("\n");
 }
-// Delete a specified page
 void deletePage() {
     char page[MAX];
     struct Node *temp;
     printf("Enter page to delete: ");
     scanf("%99s", page);
     temp = head;
-    // Search for the page
     while (temp != NULL &&
            strcmp(temp->page, page) != 0) {
         temp = temp->next;
     }
-    // Page not found
     if (temp == NULL) {
         printf("Page not found. Cannot delete.\n");
         return;
     }
-    // Update previous node
     if (temp->prev != NULL)
         temp->prev->next = temp->next;
     else
         head = temp->next;
-    // Update next node
     if (temp->next != NULL)
         temp->next->prev = temp->prev;
     else
         tail = temp->prev;
-    // Move current safely
     if (temp == current) {
         if (temp->next != NULL)
             current = temp->next;
@@ -141,7 +128,6 @@ void deletePage() {
     free(temp);
     printf("Page deleted successfully.\n");
 }
-// Main function
 int main() {
     int choice;
     while (1) {
