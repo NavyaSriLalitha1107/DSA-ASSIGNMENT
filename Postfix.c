@@ -7,15 +7,12 @@ expression containing multiple operators and parentheses. */
 #define MAX 100
 char stack[MAX];
 int top = -1;
-// Push an operator into stack
 void push(char ch) {
     stack[++top] = ch;
 }
-// Pop an operator from stack
 char pop() {
     return stack[top--];
 }
-// Return precedence of operator
 int precedence(char ch) {
     if (ch == '^')
         return 3;
@@ -26,29 +23,23 @@ int precedence(char ch) {
     else
         return 0;
 }
-// Check right associativity
 int isRightAssociative(char ch) {
     return ch == '^';
 }
-// Convert infix to postfix
 void infixToPostfix(char infix[]) {
     char postfix[MAX];
     int i, k = 0;
     char ch;
     for (i = 0; infix[i] != '\0'; i++) {
         ch = infix[i];
-        // Ignore spaces
         if (ch == ' ')
             continue;
-        // If operand, add to postfix
         if (isalnum(ch)) {
             postfix[k++] = ch;
         }
-        // If opening parenthesis
         else if (ch == '(') {
             push(ch);
         }
-        // If closing parenthesis
         else if (ch == ')') {
             while (top != -1 && stack[top] != '(') {
                 postfix[k++] = pop();
@@ -56,7 +47,6 @@ void infixToPostfix(char infix[]) {
             if (top != -1 && stack[top] == '(')
                 pop();
         }
-        // If operator
         else {
             while (top != -1 &&
                    stack[top] != '(' &&
@@ -68,7 +58,6 @@ void infixToPostfix(char infix[]) {
             push(ch);
         }
     }
-    // Pop remaining operators
     while (top != -1) {
         postfix[k++] = pop();
     }
