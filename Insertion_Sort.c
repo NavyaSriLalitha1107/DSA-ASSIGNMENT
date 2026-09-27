@@ -16,13 +16,11 @@ int main() {
     for (i = 1; i < n; i++) {
         key = a[i];
         j = i - 1;
-        // Shift elements greater than key
         while (j >= 0 && a[j] > key) {
             a[j + 1] = a[j];
             j--;
             shifts++;
         }
-        // Insert key in correct position
         a[j + 1] = key;
         printf("Pass %d: ", i);
         for (j = 0; j < n; j++) {
