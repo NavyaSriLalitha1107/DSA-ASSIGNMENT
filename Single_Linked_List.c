@@ -3,13 +3,11 @@ insert at the beginning and end, search for a specified roll number, delete a sp
 list after each operation. Handle the case when a requested roll number is not available. */
 #include <stdio.h>
 #include <stdlib.h>
-// Structure for a node
 struct Node {
     int roll;
     struct Node *next;
 };
 struct Node *head = NULL;
-// Display the linked list
 void display() {
     struct Node *temp = head;
     if (head == NULL) {
@@ -23,7 +21,6 @@ void display() {
     }
     printf("NULL\n");
 }
-// Create the list
 void createList() {
     int n, roll, i;
     struct Node *newNode, *temp;
@@ -48,7 +45,6 @@ void createList() {
     printf("List created successfully.\n");
     display();
 }
-// Insert at beginning
 void insertBeginning() {
     int roll;
     struct Node *newNode =(struct Node *)malloc(sizeof(struct Node));
@@ -60,7 +56,6 @@ void insertBeginning() {
     printf("Inserted at beginning.\n");
     display();
 }
-// Insert at end
 void insertEnd() {
     int roll;
     struct Node *newNode =(struct Node *)malloc(sizeof(struct Node));
@@ -81,7 +76,6 @@ void insertEnd() {
     printf("Inserted at end.\n");
     display();
 }
-// Search for a roll number
 void search() {
     int roll, position = 1;
     struct Node *temp = head;
@@ -97,7 +91,6 @@ void search() {
     }
     printf("Roll number %d not found.\n", roll);
 }
-// Delete a specified roll number
 void deleteNode() {
     int roll;
     struct Node *temp, *prev;
@@ -105,17 +98,14 @@ void deleteNode() {
     scanf("%d", &roll);
     temp = head;
     prev = NULL;
-    // Search for the node
     while (temp != NULL && temp->roll != roll) {
         prev = temp;
         temp = temp->next;
     }
-    // Roll number not found
     if (temp == NULL) {
         printf("Roll number %d not found. Cannot delete.\n",roll);
         return;
     }
-    // Delete first node
     if (prev == NULL) {
         head = temp->next;
     } else {
@@ -125,7 +115,6 @@ void deleteNode() {
     printf("Roll number %d deleted successfully.\n", roll);
     display();
 }
-// Main function
 int main() {
     int choice;
     while (1) {
